@@ -1,0 +1,8 @@
+.menu__item{
+    text-decoration: none;
+    color: var(--link-color);
+}
+
+.menu__item:hover{
+    color: var(--link-color-hovered);
+}
