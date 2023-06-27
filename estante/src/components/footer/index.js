@@ -3,7 +3,7 @@ import './footer.css';
 const Footer = () => {
     return <>
     <footer className="footer">
-        Oloquinho
+        ALPHA 1.0
     </footer>
     </>
 }
