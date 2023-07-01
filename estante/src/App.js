@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './assets/css/reset.css';
 import './App.css';
 import './assets/css/main.css';
+import './assets/css/grid.css';
 
 import Header from './components/header';
 import Footer from './components/footer';

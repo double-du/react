@@ -1,0 +1,4 @@
+.cover-menu-laytout{
+    display: flex;
+    flex-direction: column;
+}
