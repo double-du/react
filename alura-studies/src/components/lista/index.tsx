@@ -2,8 +2,12 @@ import { Tarefa } from '../../types/tarefa';
 import Item from './item';
 import style from './lista.module.scss';
 
+interface Props{
+    tarefas: Tarefa[],
+    selecionarTarefa: (tarefaSelecionada:Tarefa) => void
+}
 
-export default function Lista({tarefas}:{tarefas: Tarefa[]}){
+export default function Lista({tarefas, selecionarTarefa}: Props){
     return (
     <>
         <aside className={style.listaTarefas}>
@@ -18,6 +22,7 @@ export default function Lista({tarefas}:{tarefas: Tarefa[]}){
                             // tempo={tarefa.tempo}
                             {...tarefa}
                             // Isso é chamado de Spread. Transforma todos os atributos do componente em props
+                            selecionarTarefa={selecionarTarefa}
                         />
                     ))
                 }

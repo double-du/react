@@ -1,8 +1,11 @@
 import React, { SetStateAction } from "react";
 import Botao from "../botao";
 
-import style from './formulario.module.scss';
 import { Tarefa } from "../../types/tarefa";
+
+import style from './formulario.module.scss';
+
+import {v4 as uuidv4} from 'uuid'
 
 export default class Formulario extends React.Component<{
     setTarefas: React.Dispatch<React.SetStateAction<Tarefa[]>>
@@ -16,8 +19,24 @@ export default class Formulario extends React.Component<{
     adicionarTarefa(evento: React.FormEvent<HTMLFormElement>) {
         evento.preventDefault();
         this.props.setTarefas(
-            tarefasAntigas => [...tarefasAntigas, {...this.state}]
+            tarefasAntigas => 
+                [...tarefasAntigas, 
+                    {
+                        ...this.state,
+                        selecionado: false,
+                        completado: false,
+                        id: uuidv4()
+                    }
+                ]
         );
+        this.limparForm();
+    }
+
+    limparForm(){
+        this.setState({
+            tarefa: '',
+            tempo: '00:00:00'
+        });
     }
 
     render(): React.ReactNode {
