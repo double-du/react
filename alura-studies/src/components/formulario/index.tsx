@@ -1,13 +1,29 @@
-import React from "react";
+import React, { SetStateAction } from "react";
 import Botao from "../botao";
 
 import style from './formulario.module.scss';
+import { Tarefa } from "../../types/tarefa";
 
-export default class Formulario extends React.Component{
+export default class Formulario extends React.Component<{
+    setTarefas: React.Dispatch<React.SetStateAction<Tarefa[]>>
+}>
+    {
+    state = {
+        tarefa: '',
+        tempo: '00:00:00'
+    }
+
+    adicionarTarefa(evento: React.FormEvent<HTMLFormElement>) {
+        evento.preventDefault();
+        this.props.setTarefas(
+            tarefasAntigas => [...tarefasAntigas, {...this.state}]
+        );
+    }
+
     render(): React.ReactNode {
         return(
         <>
-            <form action="" className={style.novaTarefa}>
+            <form className={style.novaTarefa} onSubmit={this.adicionarTarefa.bind(this)}>
                 <div className={style.inputContainer}>
                     <label htmlFor="tarefa">Adicione um novo estudo</label>
                     <input 
@@ -15,7 +31,13 @@ export default class Formulario extends React.Component{
                         id="tarefa" 
                         placeholder="O que você quer estudar" 
                         type="text" 
-                        required 
+                        required
+                        value={this.state.tarefa}
+                        onChange={
+                            evt => {
+                                this.setState({...this.state, tarefa: evt.target.value})
+                            }
+                        } 
                     />
                 </div>
                 <div className={style.inputContainer}>
@@ -28,9 +50,17 @@ export default class Formulario extends React.Component{
                         min="00:00:00" 
                         max="01:30:00" 
                         required
+                        value={this.state.tempo}
+                        onChange={
+                            evt => {
+                                this.setState({...this.state, tempo: evt.target.value})
+                            }
+                        }
                     />
                 </div>
-                <Botao />
+                <Botao type="submit">
+                    Adicionar
+                </Botao>
             </form>
         </>
         );

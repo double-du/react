@@ -1,17 +1,9 @@
+import { Tarefa } from '../../types/tarefa';
+import Item from './item';
 import style from './lista.module.scss';
 
-export default function Lista(){
-    
-    const tarefas = [{
-        tarefa: 'React',
-        tempo: '01:00:00'
-    },{
-        tarefa: 'Javascript',
-        tempo: '00:30:00'
-    },{
-        tarefa: 'TypeScript',
-        tempo: '00:30:00'
-    }];
+
+export default function Lista({tarefas}:{tarefas: Tarefa[]}){
     return (
     <>
         <aside className={style.listaTarefas}>
@@ -20,10 +12,13 @@ export default function Lista(){
                 {
                     tarefas.map((tarefa, index) => (
                         // React precisa de um Indice do DOM, por isso o Index
-                        <li className={style.item} key={index}>
-                            <h3>{tarefa.tarefa}</h3>
-                            <span>{tarefa.tempo}</span>
-                        </li>
+                        <Item 
+                            key={index}
+                            // tarefa={tarefa.tarefa}
+                            // tempo={tarefa.tempo}
+                            {...tarefa}
+                            // Isso é chamado de Spread. Transforma todos os atributos do componente em props
+                        />
                     ))
                 }
             </ul>      
